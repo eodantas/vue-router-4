@@ -7,9 +7,14 @@ const route = useRoute()
 <template>
   <Navigation />
   <div class="container">
+    <RouterView v-slot="{ Component }" class="view left-sidebar" name="LeftSidebar">
+      <Transition name="fade" mode="out-in">
+        <Component :is="Component" :key="route.path"></Component>
+      </Transition>
+    </RouterView>
     <!-- USAR QDO OS DADOS VIEREM DE CHAMADA AJAX -->
     <!-- <RouterView :key="route.path" /> -->
-    <RouterView v-slot="{ Component }">
+    <RouterView v-slot="{ Component }" class="main-view">
       <!-- <Transition name="slide" mode="out-in"> -->
       <Transition name="fade" mode="out-in">
         <Component :is="Component" :key="route.path"></Component>
@@ -60,5 +65,8 @@ const route = useRoute()
   100% {
     transform: translateY(-400px);
   }
+}
+.main-view {
+  width: 100%;
 }
 </style>
